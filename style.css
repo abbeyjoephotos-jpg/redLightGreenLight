@@ -1,0 +1,160 @@
+
+header {
+    border: 5px solid salmon;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 65px;
+    font-weight: 900;
+    color: coral;
+    padding: 15px;
+
+
+    border-radius: 20px;
+    background-color: blanchedalmond;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.traffic-light-container {
+    position: relative;
+    width: 70%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bg-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.red-light span {
+    background: linear-gradient(
+        rgba(0,0,0,.6),
+        rgba(0,0,0,.6)
+    ),
+    red;  
+    background-color: ;
+    border-radius:
+        62% 55% 65% 50%
+        /
+        62% 50% 52% 50%;
+    transform: rotate(-20deg);
+    
+}
+.red-light {
+    position: absolute;
+    z-index: 2;
+    top: 19.8%;
+    left: 45.1%;
+    width: 7%;
+    aspect-ratio: 84 / 101;
+}
+
+.red-light.on span {
+   background: radial-gradient(circle,
+        #ff9b9b 0%,
+        #ff2a2a 55%,
+        #900000 100%);
+
+        box-shadow:
+        0 0 8px #ff4d4d,
+        0 0 18px #ff0000,
+        0 0 30px rgba(255, 0, 0, 0.8);
+}
+.yellow-light span {
+    width: 82px;
+    height: 96px;
+    border: 2px solid #a67c00;
+    background: linear-gradient(
+        rgba(0,0,0,.6),
+        rgba(0,0,0,.6)
+    ),
+    yellow;  
+    border-radius:
+        62% 55% 70% 60%
+        /
+        75% 55% 75% 55%;
+    transform: rotate(-20deg);
+}
+
+.yellow-light {
+    position: absolute;
+    z-index: 2;
+    top: 38%;
+    left: 45%;
+    width: 7%;
+    aspect-ratio: 82 / 96;
+}
+
+.yellow-light.on span {
+    background: radial-gradient(circle,
+        #fff8a8 0%,
+        #ffd400 55%,
+        #a67c00 100%);
+    box-shadow:
+        0 0 8px #ffe55c,
+        0 0 18px #ffd400,
+        0 0 30px rgba(255, 212, 0, 0.8);
+}
+.green-light span {
+    width: 82px;
+    height: 96px;
+    border: 2px solid green;
+    background: green;
+    border-radius:
+        62% 55% 68% 50%
+        /
+        70% 50% 55% 50%;
+    transform: rotate(-20deg);
+}
+.green-light {
+    position: absolute;
+    z-index: 2;
+    top: 56%;
+    left: 45%;
+    width: 7%;
+    aspect-ratio: 82 / 96;
+}
+
+.green-light.on span {
+    background: radial-gradient(circle,
+        #a8ffb8 0%,
+        #00d83a 55%,
+        #006b1d 100%);
+    box-shadow:
+        0 0 8px #5cff84,
+        0 0 18px #00d83a,
+        0 0 30px rgba(0, 216, 58, 0.8);
+}
+
+button {
+    height: 100px;
+    width: 300px;
+}
+.red-light span,
+.yellow-light span,
+.green-light span {
+    display: block;
+    width: 100%;
+    height:100%;
+}
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 5px solid salmon;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 65px;
+    font-weight: 900;
+    color: coral;
+    padding: 15px;
+
+
+    border-radius: 20px;
+    background-color: blanchedalmond; 
+    border-top: -20px;
+    padding-top: -20px;
+}
+#buttons {
+    display: flex;
+    justify-content: space-around;
+}
