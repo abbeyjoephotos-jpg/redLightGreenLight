@@ -126,10 +126,8 @@ header {
         0 0 30px rgba(0, 216, 58, 0.8);
 }
 
-button {
-    height: 100px;
-    width: 300px;
-}
+
+
 .red-light span,
 .yellow-light span,
 .green-light span {
@@ -138,21 +136,42 @@ button {
     height:100%;
 }
 button {
+    height: 100px;
+    width: 300px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
     border: 5px solid salmon;
+    border-radius: 20px;
+
+    background-color: blanchedalmond;
+    color: coral;
+
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 65px;
     font-weight: 900;
-    color: coral;
-    padding: 15px;
+    
+    box-shadow: 0 8px 0 salmon;
 
-
-    border-radius: 20px;
-    background-color: blanchedalmond; 
-    border-top: -20px;
-    padding-top: -20px;
+    cursor: pointer;
+}
+button:active {
+    transform: translateY(8px);
+    
+        box-shadow:
+        0 0 15px red,
+        0 0 30px rgba(255, 0, 0, .5),
+        inset 0 0 55px rgba(255, 0, 0, .7);
+}
+button.paused {
+        transform: translateY(8px);
+    
+        box-shadow:
+        0 0 15px red,
+        0 0 30px rgba(255, 0, 0, .5),
+        inset 0 0 55px rgba(255, 0, 0, .7)
 }
 #buttons {
     display: flex;
