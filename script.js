@@ -90,6 +90,7 @@ function selectGreen() {
 };
 
 function pauseTimer() {
+
     let elapsedTime = Date.now() - timerStart;
 
     remainingTime = currentDuration - elapsedTime;
@@ -146,15 +147,17 @@ buttons.forEach((button) => {
         let clickedLight;
 
         if (clickedButton === "red-button") {
-            clickedLight = "red";           
+            clickedLight = "red";
         }
+       
         else if (clickedButton === "yellow-button") {
             clickedLight = "yellow";
         }
+        
         else {
             clickedLight = "green";
-
         }
+
         if (currentLight === clickedLight) {
             if (isPaused) {
                 resumeTimer();
@@ -164,14 +167,30 @@ buttons.forEach((button) => {
             }
         }
         else {
+            isPaused = false;
+
             if (clickedLight === "red") {
+
                 selectRed();
+
+                greenButton.classList.remove("paused");
+                yellowButton.classList.remove("paused");               
             }
+
             else if (clickedLight === "yellow") {
+
                 selectYellow();
+
+                greenButton.classList.remove("paused");
+                redButton.classList.remove("paused");
             }
+
             else {
                 selectGreen();
+
+                redButton.classList.remove("paused");
+                yellowButton.classList.remove("paused");
+                
             }
 
         };
