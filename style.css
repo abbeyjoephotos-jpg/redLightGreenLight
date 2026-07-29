@@ -1,18 +1,48 @@
+#hero-container {
+    display: flex;
+    justify-content: center;
+}
+#hero-base {
+    height: 135px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #050505;
+    border-top: 10px solid #f4d06f;
+    border-left: 10px solid #d4af37;
+    border-right: 10px solid #8a6508;
+    border-bottom: 10px solid #5f4607;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+#hero {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+}
 
 header {
-    border: 5px solid salmon;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: inline-flex;
+    justify-content: center;
+    
+    color: whitesmoke;
     font-size: 65px;
-    font-weight: 900;
-    color: coral;
-    padding: 15px;
+    background-color:  #050505;
+    padding: 5px 0;
+    padding-right: 75px;
+    padding-left: 75px;
 
+    border-top: 10px solid #f4d06f;
+    border-left: 10px solid #d4af37;
+    border-right: 10px solid #8a6508;
+    border-bottom: 10px solid #5f4607;
 
-    border-radius: 20px;
-    background-color: blanchedalmond;
-    width: fit-content;
-    margin: 20px auto;
+    border-radius: 10px;
+    
 }
+
+/* Traffic light */
 
 .traffic-light-container {
     position: relative;
@@ -48,6 +78,19 @@ header {
     width: 7%;
     aspect-ratio: 84 / 101;
 }
+.red-lens-container {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0.40;
+
+    left: 1%;
+    width: 65px;
+    height: auto;
+}
+.red-light-lens {
+    width: 86px;
+    height: 104px;
+}
 
 .red-light.on span {
    background: radial-gradient(circle,
@@ -58,7 +101,7 @@ header {
         box-shadow:
         0 0 8px #ff4d4d,
         0 0 18px #ff0000,
-        0 0 30px rgba(255, 0, 0, 0.8);
+        0 0 55px rgba(255, 0, 0, 1.0);
 }
 .yellow-light span {
     width: 82px;
@@ -84,6 +127,18 @@ header {
     width: 7%;
     aspect-ratio: 82 / 96;
 }
+.yellow-lens-container {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0.45;
+
+    width: 7%;
+    aspect-ratio: 96 / 107;
+}
+.yellow-light-lens {
+    width: 86px;
+    height: 102px;
+}
 
 .yellow-light.on span {
     background: radial-gradient(circle,
@@ -93,7 +148,7 @@ header {
     box-shadow:
         0 0 8px #ffe55c,
         0 0 18px #ffd400,
-        0 0 30px rgba(255, 212, 0, 0.8);
+        0 0 45px rgba(255, 212, 0, 1.0);
 }
 .green-light span {
     width: 82px;
@@ -114,6 +169,25 @@ header {
     width: 7%;
     aspect-ratio: 82 / 96;
 }
+.green-lens-container {
+    position: absolute;   
+    opacity: 0.43;
+
+    z-index: 1000;
+
+    top: 1%;
+    left: 1%;
+    width: 7%;
+    aspect-ratio: 82 / 96;
+
+}
+.green-light-lens {
+    position: absolute;
+    width: 86px;
+    height: 102px;
+
+
+}
 
 .green-light.on span {
     background: radial-gradient(circle,
@@ -123,7 +197,7 @@ header {
     box-shadow:
         0 0 8px #5cff84,
         0 0 18px #00d83a,
-        0 0 30px rgba(0, 216, 58, 0.8);
+        0 0 45px rgba(0, 216, 58, 0.9);
 }
 
 
@@ -135,6 +209,118 @@ header {
     width: 100%;
     height:100%;
 }
+/* Timer */
+/* All segments dim/off */
+.timer-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background-color:  #050505;
+    padding: 20px 24px;
+    padding-right: 90px;
+
+    border-top: 10px solid #f4d06f;
+    border-left: 10px solid #d4af37;
+    border-right: 10px solid #8a6508;
+    border-bottom: 10px solid #5f4607;
+
+    border-radius: 10px;
+
+}
+#countdown-timer {
+    position: absolute;
+    top: 250px;
+    right:50px;
+}
+.segment {
+    position: absolute;
+    background-color: #280000;
+    box-shadow: none;
+    opacity: 0.35;
+    border-radius: 5px;
+}
+
+.seven-segment {
+    position: relative;
+    width: 80px;
+    height: 120px;
+}
+/* Horizontal segments*/
+
+.top,
+.middle,
+.bottom {
+    width: 50px;
+    height: 10px;
+    left: 10px;
+}
+.top {
+    top: 0;
+}
+.middle {
+    top: 55px;
+}
+.bottom {
+    bottom: 0;
+}
+/* Vertical segments */
+.upper-left,
+.upper-right,
+.bottom-left,
+.bottom-right {
+    width: 10px;
+    height: 50px;
+}
+.upper-left {
+    top: 5px;
+    left: 0;
+}
+.upper-right {
+    top: 5px;
+    right: 0;
+}
+.bottom-left {
+    bottom: 5px;
+    left: 0;
+}
+.bottom-right {
+    bottom: 5px;
+    right: 0;
+}
+/* When segments lit */
+.segment.on {
+    background: #ff2a2a;
+    box-shadow:
+        0 0 6px #ff4d4d,
+        0 0 14px #ff0000,
+        0 0 28px rgba(255, 0, 0, 0.8);
+    opacity: 1;
+}
+.dot {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+
+    background: #ff2a2a;
+    box-shadow:
+        0 0 6px #ff4d4d,
+        0 0 14px #ff0000,
+        0 0 28px rgba(255, 0, 0, 0.8);
+    opacity: 1;
+}
+.digit-dot {
+    height: 120px;
+    width: 15px;
+
+    display: flex;
+    align-items: flex-end;
+
+}
+
+/* buttons */
+
 button {
     height: 100px;
     width: 300px;
