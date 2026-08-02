@@ -15,68 +15,74 @@
             </div>
         </div>
     </div>
-    <div class="traffic-light-container">
-        <img src="stoplightImage/trafficlight.jpg" alt="Traffic Light" class="bg-image">
+    <div class="main-page-container">
+        <div class="rules-container">
+            <img src="stoplightImage/rules-sheet.jpg" alt="rules" class="rules-sheet">
+        </div>
+        <div class="traffic-light-container">
+            <img src="stoplightImage/trafficlight.png" alt="Traffic Light" class="bg-image">
     
-        <div class="lights">
-            <div class="red-light">
-                <div class="red-lens-container">
-                    <img src="stoplightImage/light-lens.jpg" alt="lens" class="red-light-lens">
-                </div>
+            <div class="lights">
+                <div class="red-light">
+                    <div class="red-lens-container">
+                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="red-light-lens">
+                    </div>
                 <span></span>
+                </div>
+                <div class="yellow-light">
+                    <div class="yellow-lens-container">
+                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="yellow-light-lens">
+                    </div>
+                    <span></span>
+                </div>
+                <div class="green-light">
+                    <div class="green-lens-container">
+                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="green-light-lens">
+                    </div>
+                    <span></span>
+                </div>
             </div>
-            <div class="yellow-light">
-                <div class="yellow-lens-container">
-                    <img src="stoplightImage/light-lens.jpg" alt="lens" class="yellow-light-lens">
+        </div>
+        <div id="countdown-timer">
+
+            <div class="timer-box">
+                <div id="tens" class="seven-segment">
+                    <span class="segment top"></span>
+                    <span class="segment upper-left"></span>
+                    <span class="segment upper-right"></span>
+                    <span class="segment middle"></span>
+                    <span class="segment bottom-left"></span>
+                    <span class="segment bottom-right"></span>
+                    <span class="segment bottom"></span>
                 </div>
-                <span></span>
-            </div>
-            <div class="green-light">
-                <div class="green-lens-container">
-                    <img src="stoplightImage/light-lens.jpg" alt="lens" class="green-light-lens">
+
+                <div id="ones" class="seven-segment">
+                    <span class="segment top"></span>
+                    <span class="segment upper-left"></span>
+                    <span class="segment upper-right"></span>
+                    <span class="segment middle"></span>
+                    <span class="segment bottom-left"></span>
+                    <span class="segment bottom-right"></span>
+                    <span class="segment bottom"></span>
                 </div>
-                <span></span>
+
+                <div class="digit-dot">
+                    <span class="dot"></span>
+                </div>
+
+                <div id="milliseconds" class="seven-segment">
+                    <span class="segment top"></span>
+                    <span class="segment upper-left"></span>
+                    <span class="segment upper-right"></span>
+                    <span class="segment middle"></span>
+                    <span class="segment bottom-left"></span>
+                    <span class="segment bottom-right"></span>
+                    <span class="segment bottom"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div id="countdown-timer">
 
-        <div class="timer-box">
-            <div id="tens" class="seven-segment">
-                <span class="segment top"></span>
-                <span class="segment upper-left"></span>
-                <span class="segment upper-right"></span>
-                <span class="segment middle"></span>
-                <span class="segment bottom-left"></span>
-                <span class="segment bottom-right"></span>
-                <span class="segment bottom"></span>
-            </div>
-
-            <div id="ones" class="seven-segment">
-                <span class="segment top"></span>
-                <span class="segment upper-left"></span>
-                <span class="segment upper-right"></span>
-                <span class="segment middle"></span>
-                <span class="segment bottom-left"></span>
-                <span class="segment bottom-right"></span>
-                <span class="segment bottom"></span>
-            </div>
-
-            <div class="digit-dot">
-                <span class="dot"></span>
-            </div>
-
-            <div id="milliseconds" class="seven-segment">
-                <span class="segment top"></span>
-                <span class="segment upper-left"></span>
-                <span class="segment upper-right"></span>
-                <span class="segment middle"></span>
-                <span class="segment bottom-left"></span>
-                <span class="segment bottom-right"></span>
-                <span class="segment bottom"></span>
-            </div>
-        </div>
-    </div>
     <div id="buttons">
         <button id="red-button">RED</button>
         <button id="yellow-button">YELLOW</button>
