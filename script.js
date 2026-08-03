@@ -28,6 +28,15 @@ const lightChoiceMap = {
 
 const choices = [redLight, yellowLight, greenLight];
 
+const daySwitch = 
+    document.querySelector("#day-switch");
+
+const dayNightImage = 
+    document.querySelector(".day-night-img");
+
+const mainPage =
+    document.querySelector(".main-page-container");
+
 // Timer display //
 
 const digitsMap = {
@@ -58,6 +67,7 @@ let currentDuration;
 let isPaused = false;
 let currentLight = null;
 
+let isDay = true;
 // Functions for lighting up  and timer //
 
 function displayDigit(display, digit) {
@@ -123,7 +133,7 @@ function resumeTimer() {
 
         yellowButton.classList.remove("paused");
     }
-    
+
     startCountdown();
     
     isPaused = false;
@@ -268,4 +278,24 @@ buttons.forEach((button) => {
 
         };
     });
+});
+
+daySwitch.addEventListener("click", () => {
+    if (isDay) {
+        isDay = false;
+    
+        dayNightImage.src = "stoplightImage/sun.png";
+        dayNightImage.alt = "Switch to Night Mode";
+        
+        mainPage.classList.add("night");
+    }
+
+    else {
+        isDay = true
+
+        dayNightImage.src = "stoplightImage/moon.png";
+        dayNightImage.alt = "Switch to Day Mode";
+       
+        mainPage.classList.remove("night");
+    }
 });
