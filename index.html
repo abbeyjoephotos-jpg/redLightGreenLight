@@ -15,8 +15,8 @@
             </div>
         </div>
         <div id="day-night">
-            <button id="day-switch">
-                <img src="stoplightImage/moon.png" alt="day-night" class="day-night-img">
+            <button id="day-switch" class="day-night-button">
+                <img class="day-night-img" src="stoplightImage/moon.png" alt="day/night">
             </button>
         </div>
     </div>
@@ -24,8 +24,21 @@
         <div class="rules-container">
             <img src="stoplightImage/rules-sheet.png" alt="rules" class="rules-sheet">
         </div>
+
         <div class="traffic-light-container">
-            <img src="stoplightImage/trafficlight.png" alt="Traffic Light" class="bg-image">
+            <div class="sun-moon-container">
+                <div class="sun-container">
+                    <img src="stoplightImage/sun.png" alt="Sun Image" class="sun-image">
+                </div>
+                <div class="moon-container">
+                    <img src="stoplightImage/moon.png" alt="Moon Image" class="moon-image">
+                </div>
+            </div>
+            <div class="traffic-light-image">
+                <img src="stoplightImage/trafficlight2.png" alt="Traffic Light" class="bg-image">
+                <div class="streetlight-glow"></div>
+                <div class="streetlight-spill"></div>
+            </div>
     
             <div class="lights">
                 <div class="red-light">
@@ -88,10 +101,25 @@
         </div>
     </div>
 
-    <div id="buttons">
-        <button id="red-button">RED</button>
-        <button id="yellow-button">YELLOW</button>
-        <button id="green-button">GREEN</button>
+    <div id="buttons-container">
+        <div id="red-container">
+            <button id="red-button" class="control-button">
+                <img src="stoplightImage/redLight.png" alt="Red Light" class="red-light-img">
+            </button>
+            
+        </div>
+        <div id="yellow-container">
+            <button id="yellow-button" class="control-button">
+                <img src="stoplightImage/yellowLight.png" alt="Yellow Light" class="yellow-light-img">
+            </button>
+            
+        </div>
+        <div id="green-container">
+            <button id="green-button" class="control-button">
+                <img src="stoplightImage/greenLight.png" alt="Green Light" class="green-light-img">
+            </button>
+            
+        </div>
     </div>
 </body>
 </html>

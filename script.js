@@ -26,6 +26,8 @@ const lightChoiceMap = {
     green: greenLight
 };
 
+const daytimeChoices = ["day", "night"];
+
 const choices = [redLight, yellowLight, greenLight];
 
 const daySwitch = 
@@ -34,8 +36,22 @@ const daySwitch =
 const dayNightImage = 
     document.querySelector(".day-night-img");
 
-const mainPage =
-    document.querySelector(".main-page-container");
+const trafficLightBg =
+    document.querySelector(".traffic-light-container");
+
+const streetlight = 
+    document.querySelector(".streetlight-glow");
+
+const streetlightSpill =
+    document.querySelector(".streetlight-spill");
+
+const sunImage = 
+    document.querySelector(".sun-image");
+
+const moonImage = 
+    document.querySelector(".moon-image");
+
+
 
 // Timer display //
 
@@ -220,6 +236,30 @@ function selectGreen() {
     }, 10000);
 };
 
+// Functions for sun/moon animations //
+
+function handleSunAnimationEnd(event) {
+    if (event.animationName === "sun-exit") {
+        moonImage.classList.remove("moon-exit");
+        moonImage.classList.add("moon-enter");
+    };
+    if(event.animationName === "sun-enter") {
+        sunImage.classList.remove("sun-enter");
+        sunImage.classList.add("sun-shine");
+    }
+}
+
+function handleMoonAnimationEnd(event) {
+    if (event.animationName === "moon-exit") {
+        sunImage.classList.remove("sun-exit");
+        sunImage.classList.add("sun-enter");
+    };
+    if (event.animationName ==="moon-enter") {
+        moonImage.classList.remove("moon-enter");
+        moonImage.classList.add("moon-shine");
+    }
+}
+
 
 
 // Event listener //
@@ -280,6 +320,7 @@ buttons.forEach((button) => {
     });
 });
 
+
 daySwitch.addEventListener("click", () => {
     if (isDay) {
         isDay = false;
@@ -287,7 +328,15 @@ daySwitch.addEventListener("click", () => {
         dayNightImage.src = "stoplightImage/sun.png";
         dayNightImage.alt = "Switch to Night Mode";
         
-        mainPage.classList.add("night");
+        
+        streetlight.classList.add("night");
+        streetlightSpill.classList.add("night");
+
+        trafficLightBg.classList.remove("sky-transition-day");
+        trafficLightBg.classList.add("sky-transition-night");
+        sunImage.classList.remove("sun-shine");
+        sunImage.classList.add("sun-exit");
+        
     }
 
     else {
@@ -296,6 +345,20 @@ daySwitch.addEventListener("click", () => {
         dayNightImage.src = "stoplightImage/moon.png";
         dayNightImage.alt = "Switch to Day Mode";
        
-        mainPage.classList.remove("night");
+        
+        streetlight.classList.remove("night");
+        streetlightSpill.classList.remove("night");
+
+        trafficLightBg.classList.remove("sky-transition-night");
+        trafficLightBg.classList.add("sky-transition-day");
+        moonImage.classList.remove("moon-enter");
+        moonImage.classList.remove("moon-shine");
+        moonImage.classList.add("moon-exit");
     }
+
+  
 });
+
+sunImage.addEventListener("animationend", handleSunAnimationEnd);
+
+moonImage.addEventListener("animationend", handleMoonAnimationEnd);
