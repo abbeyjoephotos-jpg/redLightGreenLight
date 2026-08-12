@@ -23,6 +23,12 @@
     <div class="main-page-container">
         <div class="rules-container">
             <img src="stoplightImage/rules-sheet.png" alt="rules" class="rules-sheet">
+            <select id="time-limits">
+                <option value="short">5s, 5s, 1s</option>
+                <option value="medium">10s, 10s, 2s</option>
+                <option value="long">15s, 15s, 3s</option>
+                <option id="time-limit-note" disabled>* Changes will take effect when current light cycle ends *</option>
+            </select>
         </div>
 
         <div class="traffic-light-container">
@@ -34,7 +40,7 @@
                     <img src="stoplightImage/moon.png" alt="Moon Image" class="moon-image">
                 </div>
             </div>
-            <div class="traffic-light-image">
+            <div class="traffic-light-image day">
                 <img src="stoplightImage/trafficlight2.png" alt="Traffic Light" class="bg-image">
                 <div class="streetlight-glow"></div>
                 <div class="streetlight-spill"></div>
@@ -43,19 +49,19 @@
             <div class="lights">
                 <div class="red-light">
                     <div class="red-lens-container">
-                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="red-light-lens">
+                        <img src="stoplightImage/redLightLens.png" alt="lens" class="red-light-lens">
                     </div>
-                <span></span>
+                    <span></span>
                 </div>
                 <div class="yellow-light">
                     <div class="yellow-lens-container">
-                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="yellow-light-lens">
+                        <img src="stoplightImage/yellowLightLens.png" alt="lens" class="yellow-light-lens">
                     </div>
                     <span></span>
                 </div>
                 <div class="green-light">
                     <div class="green-lens-container">
-                        <img src="stoplightImage/light-lens.jpg" alt="lens" class="green-light-lens">
+                        <img src="stoplightImage/greenLightLens.png" alt="lens" class="green-light-lens">
                     </div>
                     <span></span>
                 </div>

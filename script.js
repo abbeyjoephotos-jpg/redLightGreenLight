@@ -2,11 +2,20 @@
 const redLight =
     document.querySelector(".red-light");
 
+const redLightLens =
+    document.querySelector(".red-light-lens");
+
 const yellowLight =
     document.querySelector(".yellow-light");
 
+const yellowLightLens =
+    document.querySelector(".yellow-light-lens");
+
 const greenLight =
     document.querySelector(".green-light");
+
+const greenLightLens =
+    document.querySelector(".green-light-lens");
 
 const redButton =
     document.querySelector("#red-button");
@@ -26,8 +35,6 @@ const lightChoiceMap = {
     green: greenLight
 };
 
-const daytimeChoices = ["day", "night"];
-
 const choices = [redLight, yellowLight, greenLight];
 
 const daySwitch = 
@@ -38,6 +45,9 @@ const dayNightImage =
 
 const trafficLightBg =
     document.querySelector(".traffic-light-container");
+
+const trafficLightImage =
+    document.querySelector(".traffic-light-image");
 
 const streetlight = 
     document.querySelector(".streetlight-glow");
@@ -51,7 +61,10 @@ const sunImage =
 const moonImage = 
     document.querySelector(".moon-image");
 
+const streetLightSound = new Audio("audio/streetLightSound.mp3");
 
+const timeLimits = 
+    document.querySelector("#time-limits");
 
 // Timer display //
 
@@ -84,6 +97,11 @@ let isPaused = false;
 let currentLight = null;
 
 let isDay = true;
+
+let redTime = 5000;
+let greenTime = 5000;
+let yellowTime = 1000;
+
 // Functions for lighting up  and timer //
 
 function displayDigit(display, digit) {
@@ -112,12 +130,15 @@ function pauseTimer() {
 
     if (currentLight === "red") {
         redButton.classList.add("paused");
+        redLightFlash();
     }
     else if (currentLight === "yellow") {
         yellowButton.classList.add("paused");
+        yellowLightFlash();
     }
     else {
         greenButton.classList.add("paused");
+        greenLightFlash();
     }
 
     isPaused = true;
@@ -134,6 +155,10 @@ function resumeTimer() {
         }, remainingTime);
 
         redButton.classList.remove("paused");
+
+        removeYellowLightFlash();
+        removeRedLightFlash();
+        removeGreenLightFlash();
     }
     else if (currentLight === "green") {
         timer = setTimeout(() => {
@@ -141,6 +166,10 @@ function resumeTimer() {
         },remainingTime);
 
         greenButton.classList.remove("paused");
+
+        removeRedLightFlash();
+        removeYellowLightFlash();
+        removeGreenLightFlash();
     }
     else {
         timer = setTimeout(() => {
@@ -148,6 +177,10 @@ function resumeTimer() {
         },remainingTime);
 
         yellowButton.classList.remove("paused");
+
+        removeYellowLightFlash();
+        removeRedLightFlash();
+        removeGreenLightFlash();
     }
 
     startCountdown();
@@ -160,7 +193,7 @@ function startCountdown() {
 
     timeInterval = setInterval(() => {   
         let elapsedTime = Date.now() - timerStart;
-        remainingTime = currentDuration - elapsedTime;
+        remainingTime = Math.max(0,currentDuration - elapsedTime);
 
         let millisecondsDigit = Math.floor(remainingTime / 100) % 10;
         displayDigit(milliseconds, millisecondsDigit);
@@ -180,7 +213,7 @@ function selectRed() {
     currentLight = "red";
     clearTimeout(timer);
 
-    currentDuration = 10000;
+    currentDuration = redTime;
 
     yellowLight.classList.remove("on");
     greenLight.classList.remove("on");
@@ -189,18 +222,22 @@ function selectRed() {
 
     timerStart = Date.now();
 
+    removeYellowLightFlash();
+    removeGreenLightFlash();
+    removeRedLightFlash();
     startCountdown();
 
     timer = setTimeout(() => {
         selectGreen();
-    }, 10000);
+    }, redTime);
 };
+
 
 function selectYellow() {
     currentLight = "yellow";
     clearTimeout(timer);
 
-    currentDuration = 2000
+    currentDuration = yellowTime;
 
     redLight.classList.remove("on");
     greenLight.classList.remove("on");
@@ -209,18 +246,22 @@ function selectYellow() {
 
     timerStart = Date.now();
 
+    removeRedLightFlash();
+    removeGreenLightFlash();
+    removeYellowLightFlash();
+
     startCountdown();
 
     timer = setTimeout(() => {
         selectRed();
-    }, 2000);
+    }, yellowTime);
 };
 
 function selectGreen() {
     currentLight = "green";
     clearTimeout(timer);
 
-    currentDuration = 10000;
+    currentDuration = greenTime;
 
     yellowLight.classList.remove("on");
     redLight.classList.remove("on");
@@ -229,44 +270,160 @@ function selectGreen() {
 
     timerStart = Date.now();
 
+    removeRedLightFlash();
+    removeYellowLightFlash();
+    removeGreenLightFlash();
+
     startCountdown();
 
     timer = setTimeout(() => {
         selectYellow();
-    }, 10000);
+    }, greenTime);
 };
 
+function greenLightFlash() {
+    redLight.classList.add("green-flash");
+    yellowLight.classList.add("green-flash");
+    greenLight.classList.add("green-flash");
+
+    redLightLens.src = "stoplightImage/greenLightLens.png";
+    yellowLightLens.src = "stoplightImage/greenLightLens.png";
+}
+
+function removeGreenLightFlash() {
+    redLight.classList.remove("green-flash");
+    yellowLight.classList.remove("green-flash");
+    greenLight.classList.remove("green-flash");
+
+    redLightLens.src = "stoplightImage/redLightLens.png";
+    yellowLightLens.src = "stoplightImage/yellowLightLens.png";
+}
+
+function redLightFlash() {
+    redLight.classList.add("red-flash");
+    yellowLight.classList.add("red-flash");
+    greenLight.classList.add("red-flash");
+
+    yellowLightLens.src = "stoplightImage/redLightLens.png";
+    greenLightLens.src = "stoplightImage/redLightLens.png";
+}
+
+function removeRedLightFlash() {
+    redLight.classList.remove("red-flash");
+    yellowLight.classList.remove("red-flash");
+    greenLight.classList.remove("red-flash");
+
+    yellowLightLens.src = "stoplightImage/yellowLightLens.png";
+    greenLightLens.src = "stoplightImage/greenLightLens.png";
+}
+function yellowLightFlash() {
+    redLight.classList.add("yellow-flash");
+    yellowLight.classList.add("yellow-flash");
+    greenLight.classList.add("yellow-flash");
+
+    redLightLens.src = "stoplightImage/yellowLightLens.png";
+    greenLightLens.src = "stoplightImage/yellowLightLens.png";
+}
+
+function removeYellowLightFlash() {
+    redLight.classList.remove("yellow-flash");
+    yellowLight.classList.remove("yellow-flash");
+    greenLight.classList.remove("yellow-flash");
+
+    redLightLens.src = "stoplightImage/redLightLens.png";
+    greenLightLens.src = "stoplightImage/greenLightLens.png";
+}
+
+function resizeTimeLimit() {
+    const selectedText =
+        timeLimits.options[timeLimits.selectedIndex].text;
+    
+    const measuringSpan =
+        document.createElement("span");
+
+        measuringSpan.textContent = selectedText;
+    
+    const selectStyles = window.getComputedStyle(timeLimits); 
+
+        measuringSpan.style.font = selectStyles.font;
+
+        measuringSpan.style.position = "absolute";
+        measuringSpan.style.visibility = "hidden";
+        measuringSpan.style.whiteSpace = "nowrap";
+        document.body.appendChild(measuringSpan);
+
+    const textWidth =
+        measuringSpan.offsetWidth;
+
+        timeLimits.style.width = `${textWidth + 30}px`;
+
+        measuringSpan.remove();
+}
 // Functions for sun/moon animations //
 
-function handleSunAnimationEnd(event) {
-    if (event.animationName === "sun-exit") {
-        moonImage.classList.remove("moon-exit");
-        moonImage.classList.add("moon-enter");
-    };
-    if(event.animationName === "sun-enter") {
-        sunImage.classList.remove("sun-enter");
-        sunImage.classList.add("sun-shine");
-    }
+
+function setDayState() {
+    isDay = true;
+
+    moonImage.src = "stoplightImage/moon.png";
+    sunImage.src = "stoplightImage/sun.png";
+
+    trafficLightBg.classList.add("sky-transition-day");
+    trafficLightBg.classList.remove("sky-transition-night");
+    
+    streetlight.classList.remove("night");
+    streetlightSpill.classList.remove("night");
+
+    moonImage.classList.remove("in");
+    moonImage.classList.add("out");
+
+    sunImage.classList.remove("out");
+    sunImage.classList.add("in");
+
+    streetLightSound.pause();
+    streetLightSound.currentTime = 0;
+
 }
 
-function handleMoonAnimationEnd(event) {
-    if (event.animationName === "moon-exit") {
-        sunImage.classList.remove("sun-exit");
-        sunImage.classList.add("sun-enter");
-    };
-    if (event.animationName ==="moon-enter") {
-        moonImage.classList.remove("moon-enter");
-        moonImage.classList.add("moon-shine");
-    }
+function setNightState() {
+    isDay = false;
+
+    moonImage.src = "stoplightImage/moon.png";
+    sunImage.src = "stoplightImage/sun.png";
+
+    trafficLightBg.classList.remove("sky-transition-day");
+    trafficLightBg.classList.add("sky-transition-night");
+
+    streetlight.classList.add("night");
+    streetlightSpill.classList.add("night");
+
+    sunImage.classList.remove("in");
+    sunImage.classList.add("out");
+
+    moonImage.classList.remove("out");
+    moonImage.classList.add("in");
+    startNightSound();
 }
 
+function startNightSound() {
+    streetLightSound.play();
+}
 
+function restartNightFlicker() {
+
+    streetlightSpill.classList.remove("night");
+    void streetlightSpill.offsetWidth;
+
+    streetlightSpill.classList.add("night");
+}
 
 // Event listener //
+selectRed();
+resizeTimeLimit();
 
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
-        const clickedButton = event.target.id;
+        const clickedButton = event.currentTarget.id;
         let clickedLight;
 
         if (clickedButton === "red-button") {
@@ -319,46 +476,54 @@ buttons.forEach((button) => {
         };
     });
 });
-
-
-daySwitch.addEventListener("click", () => {
-    if (isDay) {
-        isDay = false;
-    
-        dayNightImage.src = "stoplightImage/sun.png";
-        dayNightImage.alt = "Switch to Night Mode";
-        
-        
-        streetlight.classList.add("night");
-        streetlightSpill.classList.add("night");
-
-        trafficLightBg.classList.remove("sky-transition-day");
-        trafficLightBg.classList.add("sky-transition-night");
-        sunImage.classList.remove("sun-shine");
-        sunImage.classList.add("sun-exit");
-        
-    }
-
-    else {
-        isDay = true
-
-        dayNightImage.src = "stoplightImage/moon.png";
-        dayNightImage.alt = "Switch to Day Mode";
-       
-        
-        streetlight.classList.remove("night");
-        streetlightSpill.classList.remove("night");
-
-        trafficLightBg.classList.remove("sky-transition-night");
-        trafficLightBg.classList.add("sky-transition-day");
-        moonImage.classList.remove("moon-enter");
-        moonImage.classList.remove("moon-shine");
-        moonImage.classList.add("moon-exit");
-    }
-
-  
+daySwitch.addEventListener("mousedown", () => {
+    daySwitch.classList.add("pressed")
 });
 
-sunImage.addEventListener("animationend", handleSunAnimationEnd);
 
-moonImage.addEventListener("animationend", handleMoonAnimationEnd);
+daySwitch.addEventListener("mouseup", () => {
+    if (isDay) {
+        isDay = true;
+
+        dayNightImage.src = "stoplightImage/sun.png";
+        dayNightImage.alt = "Set to Day Mode";
+        
+        setNightState();  
+          
+        }
+    
+    
+    else {
+        dayNightImage.src = "stoplightImage/moon.png";
+        dayNightImage.alt = "Set to Night Mode";
+
+        setDayState();
+        }
+});
+
+streetLightSound.addEventListener("ended", () => {
+    if (isDay === false) {
+        restartNightFlicker();
+        startNightSound();
+    }
+});
+
+timeLimits.addEventListener("change", () => {
+    if (timeLimits.value === "short") {
+        redTime = 5000;
+        yellowTime = 1000;
+        greenTime = 5000
+    }
+    else if (timeLimits.value === "medium") {
+        redTime = 10000;
+        yellowTime = 2000;
+        greenTime = 10000;
+    }
+    else if (timeLimits.value === "long") {
+        redTime = 15000;
+        yellowTime = 3000;
+        greenTime = 15000;
+    }
+
+    resizeTimeLimit();
+});
