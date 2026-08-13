@@ -302,7 +302,6 @@ header {
     width: 40%;
 }
 .traffic-light-container.day {
-    position: flex;
 
     background-color: #DCEFF5;
 }

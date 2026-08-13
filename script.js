@@ -63,8 +63,19 @@ const moonImage =
 
 const streetLightSound = new Audio("audio/streetLightSound.mp3");
 
+const morningSound = new Audio("audio/morningBirds.mp3");
+
 const timeLimits = 
     document.querySelector("#time-limits");
+
+const locationsDialog =
+    document.querySelector("#locations-dialog");
+
+const locationsContinue = 
+    document.querySelector("#locations-continue");
+
+const locationsDecline =
+    document.querySelector("#locations-decline");
 
 // Timer display //
 
@@ -368,6 +379,9 @@ function setDayState() {
     moonImage.src = "stoplightImage/moon.png";
     sunImage.src = "stoplightImage/sun.png";
 
+    dayNightImage.src = "stoplightImage/moon.png";
+    dayNightImage.alt = "Set to Night Mode";
+
     trafficLightBg.classList.add("sky-transition-day");
     trafficLightBg.classList.remove("sky-transition-night");
     
@@ -382,6 +396,7 @@ function setDayState() {
 
     streetLightSound.pause();
     streetLightSound.currentTime = 0;
+    morningSound.play();
 
 }
 
@@ -390,6 +405,9 @@ function setNightState() {
 
     moonImage.src = "stoplightImage/moon.png";
     sunImage.src = "stoplightImage/sun.png";
+
+    dayNightImage.src = "stoplightImage/sun.png";
+    dayNightImage.alt = "Set to Day Mode";
 
     trafficLightBg.classList.remove("sky-transition-day");
     trafficLightBg.classList.add("sky-transition-night");
@@ -402,7 +420,7 @@ function setNightState() {
 
     moonImage.classList.remove("out");
     moonImage.classList.add("in");
-    startNightSound();
+    startNightSoud();
 }
 
 function startNightSound() {
@@ -417,9 +435,69 @@ function restartNightFlicker() {
     streetlightSpill.classList.add("night");
 }
 
-// Event listener //
-selectRed();
+// Geolocation API for Day/Night at Startup //
+
+function requestLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+
+    resizeTimeLimit();
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    const apiURL =  `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
+
+    fetch(apiURL)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            const sunrise = data.results.sunrise;
+            const sunset = data.results.sunset;
+
+        
+
+    const sunriseTime = new Date(sunrise);
+    const sunsetTime = new Date(sunset);
+    const now = new Date();
+
+        if (now > sunriseTime && now < sunsetTime) {
+            isDay = true;
+            setDayState();
+        }
+        else {
+            isDay = false;
+            setNightState();
+            
+            // startNightSound();
+        }
+    });
+    selectRed();
+});
+
+}
+// Startup Modal //
 resizeTimeLimit();
+locationsDialog.showModal();
+
+locationsContinue.addEventListener("click", () => {
+
+    locationsDialog.close();
+    requestLocation();
+
+   
+    resizeTimeLimit();
+
+});
+
+locationsDecline.addEventListener("click", () => {
+
+    locationsDialog.close();
+    setDayState();
+
+    resizeTimeLimit();
+});
+// Event listener //
+
+
 
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -484,9 +562,6 @@ daySwitch.addEventListener("mousedown", () => {
 daySwitch.addEventListener("mouseup", () => {
     if (isDay) {
         isDay = true;
-
-        dayNightImage.src = "stoplightImage/sun.png";
-        dayNightImage.alt = "Set to Day Mode";
         
         setNightState();  
           
@@ -494,8 +569,6 @@ daySwitch.addEventListener("mouseup", () => {
     
     
     else {
-        dayNightImage.src = "stoplightImage/moon.png";
-        dayNightImage.alt = "Set to Night Mode";
 
         setDayState();
         }
