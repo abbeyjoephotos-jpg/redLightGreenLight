@@ -481,9 +481,10 @@ locationsDialog.showModal();
 locationsContinue.addEventListener("click", () => {
 
     locationsDialog.close();
-    requestLocation();
+    sessionStorage.setItem("locationAnswered", "yes");
 
-   
+    requestLocation();
+  
     resizeTimeLimit();
 
 });
@@ -491,6 +492,8 @@ locationsContinue.addEventListener("click", () => {
 locationsDecline.addEventListener("click", () => {
 
     locationsDialog.close();
+    sessionStorage.setItem("locationAnswered", "no");
+
     setDayState();
 
     resizeTimeLimit();
